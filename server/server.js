@@ -28,12 +28,11 @@ app.get('/', (req, res) => {
 
 app.use('/api', peerServ);
 
-io.sockets.on('connection', function (id) {
-  console.log('connect')
+peerServ.on('connection', (id) => {
   io.emit('USER_CONNECTED', id);
 });
 
-peerServ.on('disconnect', function (id) {
+peerServ.on('disconnect', (id) => {
   io.emit('USER_DISCONNECTED', id);
 });
 
