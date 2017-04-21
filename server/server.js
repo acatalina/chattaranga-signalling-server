@@ -15,6 +15,7 @@ const server = app.listen(PORT, (error) => {
   console.log(`Server running on port ${PORT}`);
 });
 
+const io = require('socket.io')(server);
 const peerServ = ExpressPeerServer(server, OPTIONS);
 
 app.get('/', (req, res) => {
@@ -26,5 +27,14 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', peerServ);
+
+io.sockets.on('connection', function (id) {
+  console.log('connect')
+  io.emit('USER_CONNECTED', id);
+});
+
+peerServ.on('disconnect', function (id) {
+  io.emit('USER_DISCONNECTED', id);
+});
 
 module.exports = server;
