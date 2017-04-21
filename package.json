@@ -1,16 +1,17 @@
 {
-  "name": "fresh-project-template",
+  "name": "chattaranga-signalling-server",
+  "repository": "https://github.com/northcoders/Chattaranga-signalling-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
     "test": "mocha ./spec",
     "posttest": "npm run lint",
     "lint": "eslint ./",
     "precommit": "npm test",
-    "start": "npm ./server/server.js"
+    "start": "node ./server/server.js"
   },
-  "author": "",
+  "author": "fast-parrot",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
@@ -22,7 +23,7 @@
   },
   "dependencies": {
     "express": "^4.15.2",
-    "peerjs": "^0.3.14",
+    "peer": "^0.2.8",
     "socket.io": "^1.7.3"
   }
 }
