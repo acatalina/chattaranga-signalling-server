@@ -22,18 +22,25 @@ app.get('/', (req, res) => {
   res.status(200).send({
     STATUS: 'OK', 
     MESSAGE: 'Welcome to Chattaranga Signaling Server',
-    ENDPOINTS: '/api to PeerServer'
+    PEERJS: '/api',
+    'SOCKET.IO': 'emit "connect_to_room" or "disconnect_from_room" with profile {username: username, room: room}' 
   });
 });
 
 app.use('/api', peerServ);
 
-peerServ.on('connection', (id) => {
-  io.emit('USER_CONNECTED', id);
+io.sockets.on('connection', (socket) => {
+  socket.on('connect_to_room', (profile) => {
+    socket.join(profile.room);
+    io.to(profile.room).emit('USER_CONNECTED', profile.username);
+  });
 });
 
-peerServ.on('disconnect', (id) => {
-  io.emit('USER_DISCONNECTED', id);
+io.sockets.on('disconnect', (socket) => {
+  socket.on('disconnect_from_room', (profile) => {
+    socket.leave(profile.room);
+    io.to(profile.room).emit('USER_DISCONNECTED', profile.username);
+  });
 });
 
 module.exports = server;
