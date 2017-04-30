@@ -34,9 +34,7 @@ io.sockets.on('connection', (socket) => {
     socket.join(profile.room);
     io.to(profile.room).emit('USER_CONNECTED', profile.username);
   });
-});
-
-io.sockets.on('disconnect', (socket) => {
+  
   socket.on('disconnect_from_room', (profile) => {
     socket.leave(profile.room);
     io.to(profile.room).emit('USER_DISCONNECTED', profile.username);
