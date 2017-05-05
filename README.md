@@ -2,7 +2,7 @@
 
 This project was created to provide a signalling server for the multiplatform desktop app [Chattaranga](https://chattaranga.herokuapp.com) and it has been deployed [here](https://chattaranga-signalling-server.herokuapp.com).
 
-The server involves websockets (through the library Socket.io) to provide the bi-directional communication between clients, webRTC (through the library PeerJS) to provide the video/audio communication between clientsa and both are mounted over an ExpressJS server.
+The server involves websockets (through the library Socket.io) to provide the bi-directional communication between clients, webRTC (through the library PeerJS) to provide the video/audio communication between clients and both served over an ExpressJS server.
 
 To run the server locally, just clone this project and run ```npm start``` or if you would like to use it, you can use the deployed version at the provided url.
 
